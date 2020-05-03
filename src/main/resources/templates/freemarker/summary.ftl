@@ -21,77 +21,57 @@
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="/">Arkham-Store</a>
+      <a class="navbar-brand" href="/dashboard/">Covid-19-Dashboard</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/consoles/admin">Consoles</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/videogames/admin">Videogames</a>
-          </li>
           <li class="nav-item active">
-            <a class="nav-link " href="/clients/">Clients</a>
+            <a class="nav-link" href="#">Summary</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/sales/">Store</a>
+            <a class="nav-link " href="/dashboard/deaths">New Deaths Cases</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="/users/">Users</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/admin">Admin</a>
+            <a class="nav-link " href="/dashboard/recovered">Total Recovered Cases</a>
           </li>
 
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <a class="btn btn-outline-success my-2 my-sm-0" href="/clients/creation" role="button">Add a new Client</a>
-        </form>
       </div>
     </nav>
 
-    <h1 class="jumbotron text-center">List of the clients</h1>
+    <h1 class="jumbotron text-center">Countries Summary</h1>
     <main role="main" class="container">
 
       <div class="starter-template table-responsive">
         <table class="table-hover table table-bordered">
           <thead class="thead-dark">
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Picture</th>
-            <th scope="col">Name</th>
-            <th scope="col">Last name</th>
-            <th scope="col">Address</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Options</th>
+            <th>Country</th>
+            <th>New Confirmed</th>
+            <th>Total Confirmed</th>
+            <th>New Deaths</th>
+            <th>Total Deaths</th>
+            <th>New Recovered</th>
+            <th>Total Recovered</th>
+
           </tr>
           </thead>
+          <#list datas as data>
+            <tbody>
+            <tr>
+              <td>${data.country}</td>
+              <td>${data.newConfirmed}</td>
+              <td>${data.totalConfirmed}</td>
+              <td>${data.newDeaths}</td>
+              <td>${data.totalDeaths}</td>
+              <td>${data.newRecovered}</td>
+              <td>${data.totalRecovered}</td>
+            </tr>
 
-          <tbody>
-
-          <#list clients as client >
-
-          <tr>
-            <th scope="row">${client.id}</th>
-            <td><img src="../../bootstrap-4.3.1/assets/img/store/clients/${client.photo}" width="110px" height="110px"></td>
-            <td>${client.name}</td>
-            <td>${client.lastName}</td>
-            <td>${client.address}</td>
-            <td>${client.phone}</td>
-            <td>${client.email}</td>
-            <td>
-              <a href="/clients/edition/?id=${client.id}">  <i class="fa fa-edit" style="font-size:25px"></i></a>
-              <a href="/clients/delete/?id=${client.id}">  <i class="fa fa-trash" style="font-size:25px;color:red"></i> </a>
-            </td>
-
-          </tr>
-
+            </tbody>
           </#list>
-          </tbody>
         </table>
 
       </div>
@@ -100,7 +80,7 @@
 
     <footer class="footer-container-1">
       <p class="float-right"><a href="#">Back to top</a></p>
-      <p class="logo">&copy; Arkham-Store 2019</p>
+      <p class="logo">&copy; Arkham-Covid 2020</p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

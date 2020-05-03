@@ -29,7 +29,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -39,35 +39,35 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="/dashboard/summary">
+                        <a class="nav-link" href="/dashboard/summary">
                             <span data-feather="layers"></span>
                             Countries Summary
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="/dashboard/recovered">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">
                             <span data-feather="layers"></span>
-                            New Recovered Cases
+                            Total Recovered Cases
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="/videogames/admin">
+                        <a class="nav-link" href="/dashboard/deaths">
                             <span data-feather="file"></span>
-                            New Deaths Cases
+                            Total Deaths Cases
                         </a>
                     </li>
 
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span class="text-light">Saved reports</span>
-                    <a class="d-flex align-items-center text-muted text-light" href="#">
+                    <span>Saved reports</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
                         <span data-feather="plus-circle"></span>
                     </a>
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="/report/pdf">
+                        <a class="nav-link" href="/report/pdf">
                             <span data-feather="file-text"></span>
                             Daily report
                         </a>
@@ -78,29 +78,28 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">New Confirmed Cases by Countries</h1>
+                <h1 class="h2">Total Recovered by Countries</h1>
 
             </div>
 
             <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 
-            <h2>Top 10 countries by new confirmed cases</h2>
+            <h2>Top 10 countries by total recovered cases</h2>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
                     <tr>
                         <th>Country</th>
-                        <th>New Confirmed</th>
-                        <th>Total Confirmed</th>
-
+                        <th>Total Recovered</th>
+                        <th>New Recovered</th>
                     </tr>
                     </thead>
                     <#list datas as data>
                     <tbody>
                     <tr>
                         <td>${data.country}</td>
-                        <td>${data.newConfirmed}</td>
-                        <td>${data.totalConfirmed}</td>
+                        <td>${data.totalRecovered}</td>
+                        <td>${data.newRecovered}</td>
                     </tr>
 
                     </tbody>
@@ -132,13 +131,13 @@
 
 
     let countriesNames = [];
-    let newConfirmed = [];
+    let totalRecovered = [];
 
     <#list datas as data>
 
     countriesNames.push("${data.country}");
 
-    newConfirmed.push(${data.newConfirmed});
+    totalRecovered.push(${data.totalRecovered});
 
     </#list>
 // back ground color es para cambiar el color de lo que hay debajo de la linea y border color es para cambiar el color de la linea
@@ -149,20 +148,19 @@
             labels: countriesNames,
             datasets: [
                 {
-                data: newConfirmed,
+                data: totalRecovered,
                 lineTension: 0,
                 backgroundColor: 'transparent',
-                borderColor: 'black',
+                borderColor: '#007bff',
                 borderWidth: 4,
-                pointBackgroundColor: 'white'
+                pointBackgroundColor: '#007bff'
             }]
         },
         options: {
             scales: {
                 yAxes: [{
                     ticks: {
-                        // Maximo valor en Y que tendra la grafica
-                        max: 30,
+                        max: 155,
                         beginAtZero: true
                     }
                 }]
