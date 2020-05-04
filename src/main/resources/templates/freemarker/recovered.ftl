@@ -17,15 +17,17 @@
 </head>
 
 <body>
+<form action="/dashboard/recovered">
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/dashboard/">Covid-19-Dashboard</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/logout">Sign out</a>
-        </li>
-    </ul>
+        <input class="form-control form-control-dark w-100" type="text" name="country" placeholder="Search..." aria-label="Search">
+        <ul class="navbar-nav px-1">
+            <li class="nav-item text-nowrap">
+                <input type="submit" value="Search" class="btn btn-dark"/>
+            </li>
+        </ul>
 </nav>
+</form>
 
 <div class="container-fluid">
     <div class="row">
@@ -35,19 +37,13 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
                             <span data-feather="home"></span>
-                            Dashboard <span class="sr-only">(current)</span>
+                            Total Recovered Cases <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/dashboard/summary">
                             <span data-feather="layers"></span>
                             Countries Summary
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">
-                            <span data-feather="layers"></span>
-                            Total Recovered Cases
                         </a>
                     </li>
                     <li class="nav-item">
@@ -78,16 +74,16 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Total Recovered by Countries</h1>
+                <h1 class="h2">Total of People Recovered by Countries</h1>
 
             </div>
 
             <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 
-            <h2>Top 10 countries by total recovered cases</h2>
+            <h2>Data of the countries</h2>
             <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead class="thead-dark">
+                <table class="table table-bordered table-sm">
+                    <thead>
                     <tr>
                         <th>Country</th>
                         <th>Total Recovered</th>
@@ -133,11 +129,11 @@
     let countriesNames = [];
     let totalRecovered = [];
 
-    <#list datas as data>
+    <#list graphics as graphic>
 
-    countriesNames.push("${data.country}");
+    countriesNames.push("${graphic.country}");
 
-    totalRecovered.push(${data.totalRecovered});
+    totalRecovered.push(${graphic.totalRecovered});
 
     </#list>
 // back ground color es para cambiar el color de lo que hay debajo de la linea y border color es para cambiar el color de la linea

@@ -17,15 +17,17 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/dashboard/">Covid-19-Dashboard</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/logout">Sign out</a>
-        </li>
-    </ul>
-</nav>
+<form action="/dashboard/">
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/dashboard/">Covid-19-Dashboard</a>
+        <input class="form-control form-control-dark w-100" type="text" name="country" placeholder="Search..." aria-label="Search">
+        <ul class="navbar-nav px-1">
+            <li class="nav-item text-nowrap">
+                <input type="submit" value="Search" class="btn btn-dark"/>
+            </li>
+        </ul>
+    </nav>
+</form>
 
 <div class="container-fluid">
     <div class="row">
@@ -35,7 +37,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
                             <span data-feather="home"></span>
-                            Dashboard <span class="sr-only">(current)</span>
+                            New Confirmed Cases <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -47,13 +49,13 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="/dashboard/recovered">
                             <span data-feather="layers"></span>
-                            New Recovered Cases
+                            Total Recovered Cases
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="/videogames/admin">
+                        <a class="nav-link text-light" href="/dashboard/deaths">
                             <span data-feather="file"></span>
-                            New Deaths Cases
+                            Total Deaths Cases
                         </a>
                     </li>
 
@@ -134,11 +136,11 @@
     let countriesNames = [];
     let newConfirmed = [];
 
-    <#list datas as data>
+    <#list graphics as graphic>
 
-    countriesNames.push("${data.country}");
+    countriesNames.push("${graphic.country}");
 
-    newConfirmed.push(${data.newConfirmed});
+    newConfirmed.push(${graphic.newConfirmed});
 
     </#list>
 // back ground color es para cambiar el color de lo que hay debajo de la linea y border color es para cambiar el color de la linea

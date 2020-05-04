@@ -12,6 +12,8 @@ public interface CoronaVirusRepository extends JpaRepository<CoronaVirus, Long> 
 
     CoronaVirus findByCountry(String country);
 
+    List<CoronaVirus> findByCountryLike(String country);
+
     // De esta forma puedo encontrar todos y ordenar mediante el parametro sort que mande
     @Override
     List<CoronaVirus> findAll(Sort sort);

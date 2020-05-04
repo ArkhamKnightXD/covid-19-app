@@ -36,9 +36,12 @@
           <li class="nav-item">
             <a class="nav-link " href="/dashboard/recovered">Total Recovered Cases</a>
           </li>
-
         </ul>
       </div>
+      <form action="/dashboard/summary" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" name="country" placeholder="Search" aria-label="Search">
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </nav>
 
     <h1 class="jumbotron text-center">Countries Summary</h1>
@@ -49,8 +52,8 @@
           <thead class="thead-dark">
           <tr>
             <th>Country</th>
-            <th>New Confirmed</th>
             <th>Total Confirmed</th>
+            <th>New Confirmed</th>
             <th>New Deaths</th>
             <th>Total Deaths</th>
             <th>New Recovered</th>
@@ -62,8 +65,8 @@
             <tbody>
             <tr>
               <td>${data.country}</td>
-              <td>${data.newConfirmed}</td>
               <td>${data.totalConfirmed}</td>
+              <td>${data.newConfirmed}</td>
               <td>${data.newDeaths}</td>
               <td>${data.totalDeaths}</td>
               <td>${data.newRecovered}</td>

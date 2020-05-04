@@ -43,6 +43,12 @@ public class CoronaVirusService {
     }
 
 
+    public List<CoronaVirus> FindByCountryNameLike(String country){
+
+        return coronaVirusRepository.findByCountryLike("%"+country+"%");
+    }
+
+
     public void SaveAllData(List<CoronaVirus> coronaVirusListToSave){
 
         coronaVirusRepository.saveAll(coronaVirusListToSave);
