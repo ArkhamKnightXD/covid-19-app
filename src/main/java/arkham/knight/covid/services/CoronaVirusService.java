@@ -49,6 +49,109 @@ public class CoronaVirusService {
     }
 
 
+    public int GetTotalConfirmedCasesWorldwide(){
+
+        int totalConfirmedCasesInTheWorld = 0;
+
+        for (CoronaVirus corona: coronaVirusRepository.findAll()) {
+
+            totalConfirmedCasesInTheWorld += corona.getTotalConfirmed();
+        }
+
+        return totalConfirmedCasesInTheWorld;
+    }
+
+
+    public int GetNewConfirmedCasesWorldwide(){
+
+        int newConfirmedCasesInTheWorld = 0;
+
+        for (CoronaVirus corona: coronaVirusRepository.findAll()) {
+
+            newConfirmedCasesInTheWorld += corona.getNewConfirmed();
+        }
+
+        return newConfirmedCasesInTheWorld;
+    }
+
+
+    public int GetTotalDeathsWorldwide(){
+
+        int totalDeathsInTheWorld = 0;
+
+        for (CoronaVirus corona: coronaVirusRepository.findAll()) {
+
+            totalDeathsInTheWorld += corona.getTotalDeaths();
+
+        }
+        return totalDeathsInTheWorld;
+    }
+
+
+    public int GetNeDeathsWorldwide(){
+
+        int newDeathsInTheWorld = 0;
+
+        for (CoronaVirus corona: coronaVirusRepository.findAll()) {
+
+            newDeathsInTheWorld += corona.getNewDeaths();
+
+        }
+        return newDeathsInTheWorld;
+    }
+
+
+    public int GetTotalRecoveredWorldwide(){
+
+        int totalRecoveredInTheWorld = 0;
+
+        for (CoronaVirus corona: coronaVirusRepository.findAll()) {
+
+            totalRecoveredInTheWorld += corona.getTotalRecovered();
+
+        }
+        return totalRecoveredInTheWorld;
+    }
+
+
+    public int GetNewRecoveredWorldwide(){
+
+        int newRecoveredInTheWorld = 0;
+
+        for (CoronaVirus corona: coronaVirusRepository.findAll()) {
+
+            newRecoveredInTheWorld += corona.getNewRecovered();
+
+        }
+        return newRecoveredInTheWorld;
+    }
+
+
+    public float GetCoronaVirusMortalityRate(){
+
+        float mortalityRate;
+
+        float totalConfirmedCasesInTheWorld = 0;
+
+        float totalDeathsInTheWorld = 0;
+
+        for (CoronaVirus corona: coronaVirusRepository.findAll()) {
+
+            totalConfirmedCasesInTheWorld += corona.getTotalConfirmed();
+        }
+
+        for (CoronaVirus corona: coronaVirusRepository.findAll()) {
+
+            totalDeathsInTheWorld += corona.getTotalDeaths();
+
+        }
+
+        mortalityRate = (totalDeathsInTheWorld / totalConfirmedCasesInTheWorld) * 100;
+
+        return mortalityRate;
+    }
+
+
     public void SaveAllData(List<CoronaVirus> coronaVirusListToSave){
 
         coronaVirusRepository.saveAll(coronaVirusListToSave);
