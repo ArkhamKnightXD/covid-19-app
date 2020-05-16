@@ -93,4 +93,19 @@ public class CoronaVirusController {
 
         return "/freemarker/deaths";
     }
+
+
+    @RequestMapping("/worldwide")
+    public String worldwide(Model model){
+
+        model.addAttribute("title","Welcome to the Covid-19 Dashboard");
+
+        model.addAttribute("infected", coronaVirusService.GetTotalConfirmedCasesWorldwide());
+
+        model.addAttribute("deaths", coronaVirusService.GetTotalDeathsWorldwide());
+
+        model.addAttribute("recovered", coronaVirusService.GetTotalRecoveredWorldwide());
+
+        return "/freemarker/worldwide";
+    }
 }

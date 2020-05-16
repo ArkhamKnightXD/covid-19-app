@@ -49,7 +49,9 @@ public class CoronaVirusService {
     }
 
 
-    public int GetTotalConfirmedCasesWorldwide(){
+    public String GetTotalConfirmedCasesWorldwide(){
+
+        String result;
 
         int totalConfirmedCasesInTheWorld = 0;
 
@@ -58,7 +60,9 @@ public class CoronaVirusService {
             totalConfirmedCasesInTheWorld += corona.getTotalConfirmed();
         }
 
-        return totalConfirmedCasesInTheWorld;
+        result = Integer.toString(totalConfirmedCasesInTheWorld);
+
+        return result;
     }
 
 
@@ -75,7 +79,9 @@ public class CoronaVirusService {
     }
 
 
-    public int GetTotalDeathsWorldwide(){
+    public String GetTotalDeathsWorldwide(){
+
+        String result;
 
         int totalDeathsInTheWorld = 0;
 
@@ -84,7 +90,10 @@ public class CoronaVirusService {
             totalDeathsInTheWorld += corona.getTotalDeaths();
 
         }
-        return totalDeathsInTheWorld;
+
+        result = Integer.toString(totalDeathsInTheWorld);
+
+        return result;
     }
 
 
@@ -101,7 +110,9 @@ public class CoronaVirusService {
     }
 
 
-    public int GetTotalRecoveredWorldwide(){
+    public String GetTotalRecoveredWorldwide(){
+
+        String result;
 
         int totalRecoveredInTheWorld = 0;
 
@@ -110,7 +121,10 @@ public class CoronaVirusService {
             totalRecoveredInTheWorld += corona.getTotalRecovered();
 
         }
-        return totalRecoveredInTheWorld;
+
+        result = Integer.toString(totalRecoveredInTheWorld);
+
+        return result;
     }
 
 

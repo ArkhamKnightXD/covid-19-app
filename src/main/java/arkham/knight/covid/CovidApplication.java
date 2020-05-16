@@ -25,9 +25,6 @@ public class CovidApplication {
     CommandLineRunner runner(CoronaVirusService coronaVirusService){
         return args -> {
 
-
-            System.out.println(coronaVirusService.GetCoronaVirusMortalityRate());
-
            /* ObjectMapper mapper = new ObjectMapper();
 
             TypeReference<List<CoronaVirus>> typeReference = new TypeReference<List<CoronaVirus>>(){};

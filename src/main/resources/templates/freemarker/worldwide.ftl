@@ -17,17 +17,10 @@
 </head>
 
 <body>
-<form action="/dashboard/recovered">
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/dashboard/">Covid-19-Dashboard</a>
-        <input class="form-control form-control-dark w-100" type="text" name="country" placeholder="Search..." aria-label="Search">
-        <ul class="navbar-nav px-1">
-            <li class="nav-item text-nowrap">
-                <input type="submit" value="Search" class="btn btn-dark"/>
-            </li>
-        </ul>
+
 </nav>
-</form>
 
 <div class="container-fluid">
     <div class="row">
@@ -56,14 +49,14 @@
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Worldwide report </span>
-                    <a class="d-flex align-items-center text-muted text-light" href="#">
+                    <span>Worldwide Report</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
                         <span data-feather="plus-circle"></span>
                     </a>
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/worldwide">
+                        <a class="nav-link" href="#">
                             <span data-feather="file-text"></span>
                             Daily report
                         </a>
@@ -74,35 +67,12 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Total of People Recovered by Countries</h1>
+                <h1 class="h2">Worldwide information of the pandemic</h1>
 
             </div>
 
-            <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
+            <canvas class="my-4" id="pie-chart" width="1000" height="450"></canvas>
 
-            <h2>Data of the countries</h2>
-            <div class="table-responsive">
-                <table class="table table-bordered table-sm">
-                    <thead>
-                    <tr>
-                        <th>Country</th>
-                        <th>Total Recovered</th>
-                        <th>New Recovered</th>
-                    </tr>
-                    </thead>
-                    <#list datas as data>
-                    <tbody>
-                    <tr>
-                        <td>${data.country}</td>
-                        <td>${data.totalRecovered}</td>
-                        <td>${data.newRecovered}</td>
-                    </tr>
-
-                    </tbody>
-                    </#list>
-                </table>
-
-            </div>
         </main>
     </div>
 </div>
@@ -125,47 +95,29 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script>
 
+    let totalInfectedWorldwide = ${infected};
+    let totalRecoveredWorldwide = ${recovered};
+    let totalDeathsWorldwide = ${deaths};
 
-    let countriesNames = [];
-    let totalRecovered = [];
 
-    <#list graphics as graphic>
-
-    countriesNames.push("${graphic.country}");
-
-    totalRecovered.push(${graphic.totalRecovered});
-
-    </#list>
-// back ground color es para cambiar el color de lo que hay debajo de la linea y border color es para cambiar el color de la linea
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
+    new Chart(document.getElementById("pie-chart"), {
+        type: 'pie',
         data: {
-            labels: countriesNames,
-            datasets: [
-                {
-                data: totalRecovered,
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
+            labels: ["Total Infected", "Total recovered", "Total Deaths"],
+            datasets: [{
+                label: "Population (millions)",
+                backgroundColor: ["#5ecd05", "#004fa2","#ba301c"],
+                data: [totalInfectedWorldwide,totalRecoveredWorldwide,totalDeathsWorldwide]
             }]
         },
         options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        max: 155,
-                        beginAtZero: true
-                    }
-                }]
-            },
-            legend: {
-                display: false,
+            title: {
+                display: true,
+                text: 'Coronavirus worldwide data'
             }
         }
     });
+
 </script>
 </body>
 </html>
