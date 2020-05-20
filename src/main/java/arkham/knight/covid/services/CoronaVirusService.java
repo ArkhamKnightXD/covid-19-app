@@ -51,8 +51,6 @@ public class CoronaVirusService {
 
     public String GetTotalConfirmedCasesWorldwide(){
 
-        String result;
-
         int totalConfirmedCasesInTheWorld = 0;
 
         for (CoronaVirus corona: coronaVirusRepository.findAll()) {
@@ -60,13 +58,15 @@ public class CoronaVirusService {
             totalConfirmedCasesInTheWorld += corona.getTotalConfirmed();
         }
 
-        result = Integer.toString(totalConfirmedCasesInTheWorld);
-
-        return result;
+        // al final convierto a string debido a que la grafica que se trabaja con chart.js no reconoce los int ni floats
+        // pero si le mando string lo trabaja de forma normal como si fueran numeros, aunque tambien tiene que ver con que
+        // estos son datos que no se estan guardando en un objeto de una clases y por esa razon es necesario pasarlo a sting
+        // pues con otros int que estan guardados en objeto no me pasa eso
+        return Integer.toString(totalConfirmedCasesInTheWorld);
     }
 
 
-    public int GetNewConfirmedCasesWorldwide(){
+    public String GetNewConfirmedCasesWorldwide(){
 
         int newConfirmedCasesInTheWorld = 0;
 
@@ -75,13 +75,11 @@ public class CoronaVirusService {
             newConfirmedCasesInTheWorld += corona.getNewConfirmed();
         }
 
-        return newConfirmedCasesInTheWorld;
+        return Integer.toString(newConfirmedCasesInTheWorld);
     }
 
 
     public String GetTotalDeathsWorldwide(){
-
-        String result;
 
         int totalDeathsInTheWorld = 0;
 
@@ -91,13 +89,11 @@ public class CoronaVirusService {
 
         }
 
-        result = Integer.toString(totalDeathsInTheWorld);
-
-        return result;
+        return Integer.toString(totalDeathsInTheWorld);
     }
 
 
-    public int GetNeDeathsWorldwide(){
+    public String GetNewDeathsWorldwide(){
 
         int newDeathsInTheWorld = 0;
 
@@ -106,13 +102,12 @@ public class CoronaVirusService {
             newDeathsInTheWorld += corona.getNewDeaths();
 
         }
-        return newDeathsInTheWorld;
+
+        return Integer.toString(newDeathsInTheWorld);
     }
 
 
     public String GetTotalRecoveredWorldwide(){
-
-        String result;
 
         int totalRecoveredInTheWorld = 0;
 
@@ -122,13 +117,11 @@ public class CoronaVirusService {
 
         }
 
-        result = Integer.toString(totalRecoveredInTheWorld);
-
-        return result;
+        return Integer.toString(totalRecoveredInTheWorld);
     }
 
 
-    public int GetNewRecoveredWorldwide(){
+    public String GetNewRecoveredWorldwide(){
 
         int newRecoveredInTheWorld = 0;
 
@@ -137,11 +130,12 @@ public class CoronaVirusService {
             newRecoveredInTheWorld += corona.getNewRecovered();
 
         }
-        return newRecoveredInTheWorld;
+
+        return Integer.toString(newRecoveredInTheWorld);
     }
 
 
-    public float GetCoronaVirusMortalityRate(){
+    public String GetCoronaVirusMortalityRate(){
 
         float mortalityRate;
 
@@ -162,7 +156,9 @@ public class CoronaVirusService {
 
         mortalityRate = (totalDeathsInTheWorld / totalConfirmedCasesInTheWorld) * 100;
 
-        return mortalityRate;
+
+        // Aqui convierto a string de forma diferente ya que deseo que solo se muestren 2 decimales despues del punto
+        return String.format ("%.2f", mortalityRate);
     }
 
 

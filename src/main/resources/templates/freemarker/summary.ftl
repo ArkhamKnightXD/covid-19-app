@@ -36,6 +36,12 @@
           <li class="nav-item">
             <a class="nav-link " href="/dashboard/recovered">Total Recovered Cases</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/dashboard/worldwide">Total cases report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/dashboard/new">New cases report</a>
+          </li>
         </ul>
       </div>
       <form action="/dashboard/summary" class="form-inline my-2 my-lg-0">

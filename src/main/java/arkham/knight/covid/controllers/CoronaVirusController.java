@@ -22,6 +22,7 @@ public class CoronaVirusController {
         String identifier = "newConfirmed";
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
+
         if (country.equalsIgnoreCase("")) {
             model.addAttribute("datas", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
         }
@@ -100,6 +101,8 @@ public class CoronaVirusController {
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
 
+        model.addAttribute("mortality",coronaVirusService.GetCoronaVirusMortalityRate());
+
         model.addAttribute("infected", coronaVirusService.GetTotalConfirmedCasesWorldwide());
 
         model.addAttribute("deaths", coronaVirusService.GetTotalDeathsWorldwide());
@@ -107,5 +110,22 @@ public class CoronaVirusController {
         model.addAttribute("recovered", coronaVirusService.GetTotalRecoveredWorldwide());
 
         return "/freemarker/worldwide";
+    }
+
+
+    @RequestMapping("/new")
+    public String newWorldwide(Model model){
+
+        model.addAttribute("title","Welcome to the Covid-19 Dashboard");
+
+        model.addAttribute("mortality",coronaVirusService.GetCoronaVirusMortalityRate());
+
+        model.addAttribute("infected", coronaVirusService.GetNewConfirmedCasesWorldwide());
+
+        model.addAttribute("deaths", coronaVirusService.GetNewDeathsWorldwide());
+
+        model.addAttribute("recovered", coronaVirusService.GetNewRecoveredWorldwide());
+
+        return "/freemarker/newCasesWorldwide";
     }
 }

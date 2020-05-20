@@ -49,7 +49,7 @@
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Worldwide Report</span>
+                    <span>Worldwide Reports</span>
                     <a class="d-flex align-items-center text-muted" href="#">
                         <span data-feather="plus-circle"></span>
                     </a>
@@ -58,7 +58,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <span data-feather="file-text"></span>
-                            Daily report
+                            Total cases report
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/new">
+                            <span data-feather="file-text"></span>
+                            New cases report
                         </a>
                     </li>
                 </ul>
@@ -67,9 +75,10 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Worldwide information of the pandemic</h1>
+                <h1 class="h2">Mortality rate worldwide: ${mortality}%</h1>
 
             </div>
+
 
             <canvas class="my-4" id="pie-chart" width="1000" height="450"></canvas>
 

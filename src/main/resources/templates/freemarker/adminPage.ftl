@@ -71,7 +71,15 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="/dashboard/worldwide">
                             <span data-feather="file-text"></span>
-                            Daily report
+                            Total cases report
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/dashboard/new">
+                            <span data-feather="file-text"></span>
+                            New cases report
                         </a>
                     </li>
                 </ul>
