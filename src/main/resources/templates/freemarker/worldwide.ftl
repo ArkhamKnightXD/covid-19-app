@@ -30,7 +30,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
                             <span data-feather="home"></span>
-                            Total Recovered Cases <span class="sr-only">(current)</span>
+                            New Recovered Cases <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -46,6 +46,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/recovered">
+                            <span data-feather="file"></span>
+                            New Recovered Cases
+                        </a>
+                    </li>
+
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -56,7 +63,7 @@
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link active" href="#">
                             <span data-feather="file-text"></span>
                             Total cases report
                         </a>
@@ -74,11 +81,6 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Mortality rate worldwide: ${mortality}%</h1>
-
-            </div>
-
 
             <canvas class="my-4" id="pie-chart" width="1000" height="450"></canvas>
 
@@ -122,7 +124,7 @@
         options: {
             title: {
                 display: true,
-                text: 'Coronavirus worldwide data'
+                text: 'Total Cases Worldwide'
             }
         }
     });

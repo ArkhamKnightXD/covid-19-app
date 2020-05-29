@@ -87,10 +87,6 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">New Confirmed Cases by Countries</h1>
-
-            </div>
 
             <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 
@@ -152,33 +148,23 @@
 
     </#list>
 // back ground color es para cambiar el color de lo que hay debajo de la linea y border color es para cambiar el color de la linea
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
+    new Chart(document.getElementById("myChart"), {
+        type: 'bar',
         data: {
             labels: countriesNames,
             datasets: [
                 {
-                data: newConfirmed,
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: 'black',
-                borderWidth: 4,
-                pointBackgroundColor: 'white'
-            }]
+                    label: "New Confirmed Cases",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: newConfirmed
+                }
+            ]
         },
         options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        // Maximo valor en Y que tendra la grafica
-                        max: 30,
-                        beginAtZero: true
-                    }
-                }]
-            },
-            legend: {
-                display: false,
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'New Confirmed Cases By Countries'
             }
         }
     });

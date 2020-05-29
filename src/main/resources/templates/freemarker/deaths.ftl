@@ -49,7 +49,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="/dashboard/recovered">
                             <span data-feather="layers"></span>
-                            Total Recovered Cases
+                            New Recovered Cases
                         </a>
                     </li>
 
@@ -81,10 +81,6 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Total deaths by Countries</h1>
-
-            </div>
 
             <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 
@@ -145,33 +141,23 @@
 
     </#list>
 // back ground color es para cambiar el color de lo que hay debajo de la linea y border color es para cambiar el color de la linea
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
+    new Chart(document.getElementById("myChart"), {
+        type: 'polarArea',
         data: {
             labels: countriesNames,
             datasets: [
                 {
-                data: totalDeaths,
-                lineTension: 0,
-                backgroundColor: '#B83753',
-                borderColor: 'black',
-                borderWidth: 4,
-                pointBackgroundColor: 'white'
-            }]
+                    label: "Total Deaths",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: totalDeaths
+                }
+            ]
         },
         options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        // Maximo valor en Y que tendra la grafica
-                        max: 90,
-                        beginAtZero: true
-                    }
-                }]
-            },
-            legend: {
-                display: false,
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'Total Deaths Cases by Countries'
             }
         }
     });

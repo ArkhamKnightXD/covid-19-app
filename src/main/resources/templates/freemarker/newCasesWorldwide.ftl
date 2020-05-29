@@ -30,7 +30,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
                             <span data-feather="home"></span>
-                            Total Recovered Cases <span class="sr-only">(current)</span>
+                            New Recovered Cases <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -43,6 +43,13 @@
                         <a class="nav-link" href="/dashboard/deaths">
                             <span data-feather="file"></span>
                             Total Deaths Cases
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/recovered">
+                            <span data-feather="file"></span>
+                            New Recovered Cases
                         </a>
                     </li>
 
@@ -64,7 +71,7 @@
                 </ul>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link active" href="#">
                             <span data-feather="file-text"></span>
                             New cases report
                         </a>
@@ -74,10 +81,7 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Mortality rate worldwide: ${mortality}%</h1>
 
-            </div>
 
             <canvas class="my-4" id="pie-chart" width="1000" height="450"></canvas>
 
@@ -109,7 +113,7 @@
 
 
     new Chart(document.getElementById("pie-chart"), {
-        type: 'pie',
+        type: 'doughnut',
         data: {
             labels: ["New Infected", "New recovered", "New Deaths"],
             datasets: [{
@@ -121,7 +125,7 @@
         options: {
             title: {
                 display: true,
-                text: 'New worldwide cases'
+                text: 'New Worldwide Cases'
             }
         }
     });

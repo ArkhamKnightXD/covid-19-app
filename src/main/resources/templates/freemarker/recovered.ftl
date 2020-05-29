@@ -37,7 +37,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
                             <span data-feather="home"></span>
-                            Total Recovered Cases <span class="sr-only">(current)</span>
+                            New Recovered Cases <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -81,10 +81,6 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Total of People Recovered by Countries</h1>
-
-            </div>
 
             <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
 
@@ -94,16 +90,16 @@
                     <thead>
                     <tr>
                         <th>Country</th>
-                        <th>Total Recovered</th>
                         <th>New Recovered</th>
+                        <th>Total Recovered</th>
                     </tr>
                     </thead>
                     <#list datas as data>
                     <tbody>
                     <tr>
                         <td>${data.country}</td>
-                        <td>${data.totalRecovered}</td>
                         <td>${data.newRecovered}</td>
+                        <td>${data.totalRecovered}</td>
                     </tr>
 
                     </tbody>
@@ -135,42 +131,33 @@
 
 
     let countriesNames = [];
-    let totalRecovered = [];
+    let newRecovered = [];
 
     <#list graphics as graphic>
 
     countriesNames.push("${graphic.country}");
 
-    totalRecovered.push(${graphic.totalRecovered});
+    newRecovered.push(${graphic.newRecovered});
 
     </#list>
 // back ground color es para cambiar el color de lo que hay debajo de la linea y border color es para cambiar el color de la linea
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
+    new Chart(document.getElementById("myChart"), {
+        type: 'horizontalBar',
         data: {
             labels: countriesNames,
             datasets: [
                 {
-                data: totalRecovered,
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
-            }]
+                    label: "New Recovered",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: newRecovered
+                }
+            ]
         },
         options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        max: 155,
-                        beginAtZero: true
-                    }
-                }]
-            },
-            legend: {
-                display: false,
+            legend: { display: false },
+            title: {
+                display: true,
+                text: 'New Recovered Cases by Countries'
             }
         }
     });

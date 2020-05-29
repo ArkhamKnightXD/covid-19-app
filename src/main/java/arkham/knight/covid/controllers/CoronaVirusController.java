@@ -18,7 +18,7 @@ public class CoronaVirusController {
     @RequestMapping("/")
     public String index(Model model, @RequestParam(defaultValue = "") String country){
 
-        int quantityOfCasesToShow = 10;
+        int quantityOfCasesToShow = 5;
         String identifier = "newConfirmed";
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
@@ -49,6 +49,8 @@ public class CoronaVirusController {
             model.addAttribute("datas", coronaVirusService.FindByCountryNameLike(country));
         }
 
+        model.addAttribute("mortality", coronaVirusService.GetCoronaVirusMortalityRate());
+
         return "/freemarker/summary";
     }
 
@@ -56,7 +58,7 @@ public class CoronaVirusController {
     @RequestMapping("/recovered")
     public String recovered(Model model, @RequestParam(defaultValue = "") String country){
 
-        int quantityOfCasesToShow = 10;
+        int quantityOfCasesToShow = 5;
         String identifier = "newRecovered";
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
@@ -78,7 +80,7 @@ public class CoronaVirusController {
     @RequestMapping("/deaths")
     public String deaths(Model model, @RequestParam(defaultValue = "") String country){
 
-        int quantityOfCasesToShow = 10;
+        int quantityOfCasesToShow = 5;
         String identifier = "totalDeaths";
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
@@ -101,8 +103,6 @@ public class CoronaVirusController {
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
 
-        model.addAttribute("mortality",coronaVirusService.GetCoronaVirusMortalityRate());
-
         model.addAttribute("infected", coronaVirusService.GetTotalConfirmedCasesWorldwide());
 
         model.addAttribute("deaths", coronaVirusService.GetTotalDeathsWorldwide());
@@ -117,8 +117,6 @@ public class CoronaVirusController {
     public String newWorldwide(Model model){
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
-
-        model.addAttribute("mortality",coronaVirusService.GetCoronaVirusMortalityRate());
 
         model.addAttribute("infected", coronaVirusService.GetNewConfirmedCasesWorldwide());
 
