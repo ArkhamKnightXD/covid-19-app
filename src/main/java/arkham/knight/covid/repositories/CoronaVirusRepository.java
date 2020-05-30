@@ -20,5 +20,4 @@ public interface CoronaVirusRepository extends JpaRepository<CoronaVirus, Long> 
 
     // y de esta forma puedo ordenar y hacer paginacion al mismo tiempo
     List<CoronaVirus> findByCountryNotNull(Pageable pageable);
-
 }

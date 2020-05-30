@@ -19,5 +19,4 @@ public class CoronaVirusRestController {
 
         return coronaVirusService.FindAllData();
     }
-
 }

@@ -45,6 +45,7 @@ public class CoronaVirusService {
 
     public List<CoronaVirus> FindByCountryNameLike(String country){
 
+        // Las "%" significa que no es necesario que se pongan todos los caracteres correctamente
         return coronaVirusRepository.findByCountryLike("%"+country+"%");
     }
 
@@ -159,6 +160,28 @@ public class CoronaVirusService {
 
         // Aqui convierto a string de forma diferente ya que deseo que solo se muestren 2 decimales despues del punto
         return String.format ("%.2f", mortalityRate);
+    }
+
+
+    public String GetCoronaVirusMortalityRateByCountry(String countryName){
+
+        CoronaVirus countryToCalculateMortality = coronaVirusRepository.findByCountry(countryName);
+
+        float mortalityRate;
+
+        if (countryToCalculateMortality != null) {
+
+            float totalConfirmedCasesInTheCountry = countryToCalculateMortality.getTotalConfirmed();
+
+            float totalDeathsInTheCountry = countryToCalculateMortality.getTotalDeaths();
+
+            mortalityRate = (totalDeathsInTheCountry / totalConfirmedCasesInTheCountry) * 100;
+
+            return String.format ("%.2f", mortalityRate);
+        }
+
+        else
+            return "0";
     }
 
 

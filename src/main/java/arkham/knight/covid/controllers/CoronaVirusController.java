@@ -1,5 +1,6 @@
 package arkham.knight.covid.controllers;
 
+import arkham.knight.covid.models.CoronaVirus;
 import arkham.knight.covid.services.CoronaVirusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,15 +42,30 @@ public class CoronaVirusController {
     public String summary(Model model, @RequestParam(defaultValue = "") String country){
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
+
         if (country.equalsIgnoreCase("")) {
+
+            model.addAttribute("countryName", "Mortality Rate Worldwide");
             model.addAttribute("datas", coronaVirusService.FindAllSortByTotalCases());
+            model.addAttribute("mortality", coronaVirusService.GetCoronaVirusMortalityRate());
         }
 
         else{
+            CoronaVirus coronaVirusCountryToGet = coronaVirusService.FindByCountry(country);
+
+            model.addAttribute("mortality", coronaVirusService.GetCoronaVirusMortalityRateByCountry(country));
             model.addAttribute("datas", coronaVirusService.FindByCountryNameLike(country));
+
+            if (coronaVirusCountryToGet != null){
+
+                model.addAttribute("countryName", "Mortality Rate in "+coronaVirusCountryToGet.getCountry());
+            }
+
+            else
+                model.addAttribute("countryName", "Mortality Rate in ");
         }
 
-        model.addAttribute("mortality", coronaVirusService.GetCoronaVirusMortalityRate());
+
 
         return "/freemarker/summary";
     }
