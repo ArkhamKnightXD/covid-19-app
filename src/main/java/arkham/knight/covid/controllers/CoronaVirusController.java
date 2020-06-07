@@ -41,6 +41,8 @@ public class CoronaVirusController {
     @RequestMapping("/summary")
     public String summary(Model model, @RequestParam(defaultValue = "") String country){
 
+        CoronaVirus coronaVirusCountryToGet = coronaVirusService.FindByCountry(country);
+
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
 
         if (country.equalsIgnoreCase("")) {
@@ -51,7 +53,6 @@ public class CoronaVirusController {
         }
 
         else{
-            CoronaVirus coronaVirusCountryToGet = coronaVirusService.FindByCountry(country);
 
             model.addAttribute("mortality", coronaVirusService.GetCoronaVirusMortalityRateByCountry(country));
             model.addAttribute("datas", coronaVirusService.FindByCountryNameLike(country));
@@ -74,20 +75,35 @@ public class CoronaVirusController {
     @RequestMapping("/recovered")
     public String recovered(Model model, @RequestParam(defaultValue = "") String country){
 
+        CoronaVirus coronaVirusCountry = coronaVirusService.FindByCountry(country);
+
         int quantityOfCasesToShow = 5;
         String identifier = "newRecovered";
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
+        model.addAttribute("graphics", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
 
         if (country.equalsIgnoreCase("")) {
+
             model.addAttribute("datas", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+            model.addAttribute("countryName", "Recovered Rate Worldwide");
+            model.addAttribute("recoveredRate", coronaVirusService.GetRecoveredCasesRateWorldwide());
         }
 
         else{
+
+            model.addAttribute("recoveredRate", coronaVirusService.GetRecoveredCasesRateByCountry(country));
             model.addAttribute("datas", coronaVirusService.FindByCountryNameLike(country));
+
+            if (coronaVirusCountry != null){
+
+                model.addAttribute("countryName", "Recovered Rate in "+coronaVirusCountry.getCountry());
+            }
+
+            else
+                model.addAttribute("countryName", "Recovered Rate in ");
         }
 
-        model.addAttribute("graphics", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
 
         return "/freemarker/recovered";
     }
