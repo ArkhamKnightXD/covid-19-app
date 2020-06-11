@@ -26,7 +26,7 @@ public class CovidApplication {
 
             //System.out.println(coronaVirusService.GetRecoveredCasesRateWorldwide());
 
-            ObjectMapper mapper = new ObjectMapper();
+/*            ObjectMapper mapper = new ObjectMapper();
 
             TypeReference<List<CoronaVirus>> typeReference = new TypeReference<List<CoronaVirus>>(){};
 
@@ -43,7 +43,7 @@ public class CovidApplication {
 
                 System.out.println("Unable to save data: " + e.getMessage());
             }
-
+*/
         };
     };
 }

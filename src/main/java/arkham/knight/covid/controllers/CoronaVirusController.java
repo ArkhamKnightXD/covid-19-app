@@ -19,7 +19,7 @@ public class CoronaVirusController {
     @RequestMapping("/")
     public String index(Model model, @RequestParam(defaultValue = "") String country){
 
-        int quantityOfCasesToShow = 5;
+        int quantityOfCasesToShow = 4;
         String identifier = "newConfirmed";
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
@@ -33,6 +33,10 @@ public class CoronaVirusController {
         }
 
         model.addAttribute("graphics", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+        model.addAttribute("firstCountry", Integer.toString(coronaVirusService.FindByCountry("United States of America").getNewConfirmed()));
+        model.addAttribute("secondCountry", Integer.toString(coronaVirusService.FindByCountry("India").getNewConfirmed()));
+        model.addAttribute("thirdCountry", Integer.toString(coronaVirusService.FindByCountry("Russian Federation").getNewConfirmed()));
+        model.addAttribute("fourthCountry", Integer.toString(coronaVirusService.FindByCountry("Mexico").getNewConfirmed()));
 
         return "/freemarker/adminPage";
     }
@@ -77,11 +81,16 @@ public class CoronaVirusController {
 
         CoronaVirus coronaVirusCountry = coronaVirusService.FindByCountry(country);
 
-        int quantityOfCasesToShow = 5;
+        int quantityOfCasesToShow = 4;
         String identifier = "newRecovered";
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
         model.addAttribute("graphics", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+
+        model.addAttribute("firstCountry", Integer.toString(coronaVirusService.FindByCountry("Chile").getNewRecovered()));
+        model.addAttribute("secondCountry", Integer.toString(coronaVirusService.FindByCountry("Russian Federation").getNewRecovered()));
+        model.addAttribute("thirdCountry", Integer.toString(coronaVirusService.FindByCountry("United States of America").getNewRecovered()));
+        model.addAttribute("fourthCountry", Integer.toString(coronaVirusService.FindByCountry("India").getNewRecovered()));
 
         if (country.equalsIgnoreCase("")) {
 
@@ -112,7 +121,7 @@ public class CoronaVirusController {
     @RequestMapping("/deaths")
     public String deaths(Model model, @RequestParam(defaultValue = "") String country){
 
-        int quantityOfCasesToShow = 5;
+        int quantityOfCasesToShow = 4;
         String identifier = "totalDeaths";
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
@@ -125,6 +134,11 @@ public class CoronaVirusController {
         }
 
         model.addAttribute("graphics", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+        model.addAttribute("firstCountry", Integer.toString(coronaVirusService.FindByCountry("United States of America").getTotalDeaths()));
+        model.addAttribute("secondCountry", Integer.toString(coronaVirusService.FindByCountry("United Kingdom").getTotalDeaths()));
+        model.addAttribute("thirdCountry", Integer.toString(coronaVirusService.FindByCountry("Brazil").getTotalDeaths()));
+        model.addAttribute("fourthCountry", Integer.toString(coronaVirusService.FindByCountry("Italy").getTotalDeaths()));
+
 
         return "/freemarker/deaths";
     }

@@ -142,9 +142,13 @@
 
     countriesNames.push("${graphic.country}");
 
-    newRecovered.push(${graphic.newRecovered});
-
     </#list>
+
+    let firstPlace = ${firstCountry};
+    let secondPlace = ${secondCountry};
+    let thirdPlace = ${thirdCountry};
+    let fourthPlace = ${fourthCountry};
+
 // back ground color es para cambiar el color de lo que hay debajo de la linea y border color es para cambiar el color de la linea
     new Chart(document.getElementById("myChart"), {
         type: 'horizontalBar',
@@ -154,7 +158,7 @@
                 {
                     label: "New Recovered",
                     backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                    data: newRecovered
+                    data:[firstPlace,secondPlace,thirdPlace,fourthPlace]
                 }
             ]
         },
