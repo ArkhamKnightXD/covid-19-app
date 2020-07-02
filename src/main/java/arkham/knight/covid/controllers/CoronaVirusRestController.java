@@ -17,6 +17,6 @@ public class CoronaVirusRestController {
     @GetMapping("/request")
     public List<CoronaVirus> GetAllData() {
 
-        return coronaVirusService.FindAllData();
+        return coronaVirusService.findAllData();
     }
 }

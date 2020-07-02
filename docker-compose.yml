@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+
+  gamestop:
+    
+    image: kerxd/game-changer:latest
+
+    container_name: docker-gamestop
+
+    environment:
+      - SERVER_PORT=80
+
+    ports:
+      - "82:80"
+
+    networks: 
+      - gamestop-network
+
+    depends_on:
+      - mysqldb
+
+
+
+  mysqldb:
+    image: mysql:8
+
+    container_name: docker-mysql
+
+    networks:
+      - gamestop-network
+
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=arkhamstore 
+
+      
+    volumes:
+      - mysql_db:/var/lib/mysql
+      
+      
+volumes:
+  mysql_db:
+
+networks:
+  gamestop-network:

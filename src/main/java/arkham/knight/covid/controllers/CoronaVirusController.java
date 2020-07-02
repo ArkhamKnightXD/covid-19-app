@@ -25,18 +25,18 @@ public class CoronaVirusController {
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
 
         if (country.equalsIgnoreCase("")) {
-            model.addAttribute("datas", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+            model.addAttribute("datas", coronaVirusService.findAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
         }
 
         else{
-            model.addAttribute("datas", coronaVirusService.FindByCountryNameLike(country));
+            model.addAttribute("datas", coronaVirusService.findByCountryNameLike(country));
         }
 
-        model.addAttribute("graphics", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
-        model.addAttribute("firstCountry", Integer.toString(coronaVirusService.FindByCountry("United States of America").getNewConfirmed()));
-        model.addAttribute("secondCountry", Integer.toString(coronaVirusService.FindByCountry("India").getNewConfirmed()));
-        model.addAttribute("thirdCountry", Integer.toString(coronaVirusService.FindByCountry("Russian Federation").getNewConfirmed()));
-        model.addAttribute("fourthCountry", Integer.toString(coronaVirusService.FindByCountry("Mexico").getNewConfirmed()));
+        model.addAttribute("graphics", coronaVirusService.findAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+        model.addAttribute("firstCountry", Integer.toString(coronaVirusService.findByCountry("Brazil").getNewConfirmed()));
+        model.addAttribute("secondCountry", Integer.toString(coronaVirusService.findByCountry("United States of America").getNewConfirmed()));
+        model.addAttribute("thirdCountry", Integer.toString(coronaVirusService.findByCountry("India").getNewConfirmed()));
+        model.addAttribute("fourthCountry", Integer.toString(coronaVirusService.findByCountry("Pakistan").getNewConfirmed()));
 
         return "/freemarker/adminPage";
     }
@@ -45,21 +45,21 @@ public class CoronaVirusController {
     @RequestMapping("/summary")
     public String summary(Model model, @RequestParam(defaultValue = "") String country){
 
-        CoronaVirus coronaVirusCountryToGet = coronaVirusService.FindByCountry(country);
+        CoronaVirus coronaVirusCountryToGet = coronaVirusService.findByCountry(country);
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
 
         if (country.equalsIgnoreCase("")) {
 
             model.addAttribute("countryName", "Mortality Rate Worldwide");
-            model.addAttribute("datas", coronaVirusService.FindAllSortByTotalCases());
-            model.addAttribute("mortality", coronaVirusService.GetCoronaVirusMortalityRate());
+            model.addAttribute("datas", coronaVirusService.findAllSortByTotalCases());
+            model.addAttribute("mortality", coronaVirusService.getCoronaVirusMortalityRate());
         }
 
         else{
 
-            model.addAttribute("mortality", coronaVirusService.GetCoronaVirusMortalityRateByCountry(country));
-            model.addAttribute("datas", coronaVirusService.FindByCountryNameLike(country));
+            model.addAttribute("mortality", coronaVirusService.getCoronaVirusMortalityRateByCountry(country));
+            model.addAttribute("datas", coronaVirusService.findByCountryNameLike(country));
 
             if (coronaVirusCountryToGet != null){
 
@@ -79,30 +79,30 @@ public class CoronaVirusController {
     @RequestMapping("/recovered")
     public String recovered(Model model, @RequestParam(defaultValue = "") String country){
 
-        CoronaVirus coronaVirusCountry = coronaVirusService.FindByCountry(country);
+        CoronaVirus coronaVirusCountry = coronaVirusService.findByCountry(country);
 
         int quantityOfCasesToShow = 4;
         String identifier = "newRecovered";
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
-        model.addAttribute("graphics", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+        model.addAttribute("graphics", coronaVirusService.findAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
 
-        model.addAttribute("firstCountry", Integer.toString(coronaVirusService.FindByCountry("Chile").getNewRecovered()));
-        model.addAttribute("secondCountry", Integer.toString(coronaVirusService.FindByCountry("Russian Federation").getNewRecovered()));
-        model.addAttribute("thirdCountry", Integer.toString(coronaVirusService.FindByCountry("United States of America").getNewRecovered()));
-        model.addAttribute("fourthCountry", Integer.toString(coronaVirusService.FindByCountry("India").getNewRecovered()));
+        model.addAttribute("firstCountry", Integer.toString(coronaVirusService.findByCountry("Brazil").getNewRecovered()));
+        model.addAttribute("secondCountry", Integer.toString(coronaVirusService.findByCountry("India").getNewRecovered()));
+        model.addAttribute("thirdCountry", Integer.toString(coronaVirusService.findByCountry("Russian Federation").getNewRecovered()));
+        model.addAttribute("fourthCountry", Integer.toString(coronaVirusService.findByCountry("United States of America").getNewRecovered()));
 
         if (country.equalsIgnoreCase("")) {
 
-            model.addAttribute("datas", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+            model.addAttribute("datas", coronaVirusService.findAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
             model.addAttribute("countryName", "Recovered Rate Worldwide");
-            model.addAttribute("recoveredRate", coronaVirusService.GetRecoveredCasesRateWorldwide());
+            model.addAttribute("recoveredRate", coronaVirusService.getRecoveredCasesRateWorldwide());
         }
 
         else{
 
-            model.addAttribute("recoveredRate", coronaVirusService.GetRecoveredCasesRateByCountry(country));
-            model.addAttribute("datas", coronaVirusService.FindByCountryNameLike(country));
+            model.addAttribute("recoveredRate", coronaVirusService.getRecoveredCasesRateByCountry(country));
+            model.addAttribute("datas", coronaVirusService.findByCountryNameLike(country));
 
             if (coronaVirusCountry != null){
 
@@ -126,18 +126,18 @@ public class CoronaVirusController {
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
         if (country.equalsIgnoreCase("")) {
-            model.addAttribute("datas", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+            model.addAttribute("datas", coronaVirusService.findAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
         }
 
         else{
-            model.addAttribute("datas", coronaVirusService.FindByCountryNameLike(country));
+            model.addAttribute("datas", coronaVirusService.findByCountryNameLike(country));
         }
 
-        model.addAttribute("graphics", coronaVirusService.FindAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
-        model.addAttribute("firstCountry", Integer.toString(coronaVirusService.FindByCountry("United States of America").getTotalDeaths()));
-        model.addAttribute("secondCountry", Integer.toString(coronaVirusService.FindByCountry("United Kingdom").getTotalDeaths()));
-        model.addAttribute("thirdCountry", Integer.toString(coronaVirusService.FindByCountry("Brazil").getTotalDeaths()));
-        model.addAttribute("fourthCountry", Integer.toString(coronaVirusService.FindByCountry("Italy").getTotalDeaths()));
+        model.addAttribute("graphics", coronaVirusService.findAllWithPaginationAndSorting(quantityOfCasesToShow,identifier));
+        model.addAttribute("firstCountry", Integer.toString(coronaVirusService.findByCountry("United States of America").getTotalDeaths()));
+        model.addAttribute("secondCountry", Integer.toString(coronaVirusService.findByCountry("United Kingdom").getTotalDeaths()));
+        model.addAttribute("thirdCountry", Integer.toString(coronaVirusService.findByCountry("Brazil").getTotalDeaths()));
+        model.addAttribute("fourthCountry", Integer.toString(coronaVirusService.findByCountry("Italy").getTotalDeaths()));
 
 
         return "/freemarker/deaths";
@@ -149,11 +149,11 @@ public class CoronaVirusController {
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
 
-        model.addAttribute("infected", coronaVirusService.GetTotalConfirmedCasesWorldwide());
+        model.addAttribute("infected", coronaVirusService.getTotalConfirmedCasesWorldwide());
 
-        model.addAttribute("deaths", coronaVirusService.GetTotalDeathsWorldwide());
+        model.addAttribute("deaths", coronaVirusService.getTotalDeathsWorldwide());
 
-        model.addAttribute("recovered", coronaVirusService.GetTotalRecoveredWorldwide());
+        model.addAttribute("recovered", coronaVirusService.getTotalRecoveredWorldwide());
 
         return "/freemarker/worldwide";
     }
@@ -164,11 +164,11 @@ public class CoronaVirusController {
 
         model.addAttribute("title","Welcome to the Covid-19 Dashboard");
 
-        model.addAttribute("infected", coronaVirusService.GetNewConfirmedCasesWorldwide());
+        model.addAttribute("infected", coronaVirusService.getNewConfirmedCasesWorldwide());
 
-        model.addAttribute("deaths", coronaVirusService.GetNewDeathsWorldwide());
+        model.addAttribute("deaths", coronaVirusService.getNewDeathsWorldwide());
 
-        model.addAttribute("recovered", coronaVirusService.GetNewRecoveredWorldwide());
+        model.addAttribute("recovered", coronaVirusService.getNewRecoveredWorldwide());
 
         return "/freemarker/newCasesWorldwide";
     }

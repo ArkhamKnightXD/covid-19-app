@@ -2,11 +2,15 @@ package arkham.knight.covid.services;
 
 import arkham.knight.covid.models.CoronaVirus;
 import arkham.knight.covid.repositories.CoronaVirusRepository;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Service
@@ -16,13 +20,13 @@ public class CoronaVirusService {
     private CoronaVirusRepository coronaVirusRepository;
 
 
-    public List<CoronaVirus> FindAllData(){
+    public List<CoronaVirus> findAllData(){
 
         return coronaVirusRepository.findAll();
     }
 
 
-    public List<CoronaVirus> FindAllWithPaginationAndSorting(int sizeOfCasesToShow, String identifier){
+    public List<CoronaVirus> findAllWithPaginationAndSorting(int sizeOfCasesToShow, String identifier){
 
         // parametro necesario para hacer la paginacion y ordenar de forma descendente por casos nuevos confirmados
         Pageable pageSortByNewConfirmed = PageRequest.of(0, sizeOfCasesToShow, Sort.by(identifier).descending());
@@ -31,26 +35,26 @@ public class CoronaVirusService {
     }
 
 
-    public List<CoronaVirus> FindAllSortByTotalCases(){
+    public List<CoronaVirus> findAllSortByTotalCases(){
 
         return coronaVirusRepository.findAll(Sort.by("totalConfirmed").descending());
     }
 
 
-    public CoronaVirus FindByCountry(String country){
+    public CoronaVirus findByCountry(String country){
 
         return coronaVirusRepository.findByCountry(country);
     }
 
 
-    public List<CoronaVirus> FindByCountryNameLike(String country){
+    public List<CoronaVirus> findByCountryNameLike(String country){
 
         // Las "%" significa que no es necesario que se pongan todos los caracteres correctamente
         return coronaVirusRepository.findByCountryLike("%"+country+"%");
     }
 
 
-    public String GetTotalConfirmedCasesWorldwide(){
+    public String getTotalConfirmedCasesWorldwide(){
 
         int totalConfirmedCasesInTheWorld = 0;
 
@@ -66,7 +70,7 @@ public class CoronaVirusService {
     }
 
 
-    public String GetNewConfirmedCasesWorldwide(){
+    public String getNewConfirmedCasesWorldwide(){
 
         int newConfirmedCasesInTheWorld = 0;
 
@@ -79,7 +83,7 @@ public class CoronaVirusService {
     }
 
 
-    public String GetTotalDeathsWorldwide(){
+    public String getTotalDeathsWorldwide(){
 
         int totalDeathsInTheWorld = 0;
 
@@ -93,7 +97,7 @@ public class CoronaVirusService {
     }
 
 
-    public String GetNewDeathsWorldwide(){
+    public String getNewDeathsWorldwide(){
 
         int newDeathsInTheWorld = 0;
 
@@ -107,7 +111,7 @@ public class CoronaVirusService {
     }
 
 
-    public String GetTotalRecoveredWorldwide(){
+    public String getTotalRecoveredWorldwide(){
 
         int totalRecoveredInTheWorld = 0;
 
@@ -121,7 +125,7 @@ public class CoronaVirusService {
     }
 
 
-    public String GetNewRecoveredWorldwide(){
+    public String getNewRecoveredWorldwide(){
 
         int newRecoveredInTheWorld = 0;
 
@@ -135,7 +139,7 @@ public class CoronaVirusService {
     }
 
 
-    public String GetCoronaVirusMortalityRate(){
+    public String getCoronaVirusMortalityRate(){
 
         float mortalityRate;
 
@@ -157,7 +161,7 @@ public class CoronaVirusService {
     }
 
 
-    public String GetCoronaVirusMortalityRateByCountry(String countryName){
+    public String getCoronaVirusMortalityRateByCountry(String countryName){
 
         CoronaVirus countryToCalculateMortality = coronaVirusRepository.findByCountry(countryName);
 
@@ -179,7 +183,7 @@ public class CoronaVirusService {
     }
 
 
-    public String GetRecoveredCasesRateWorldwide(){
+    public String getRecoveredCasesRateWorldwide(){
 
         float totalPercent;
 
@@ -200,7 +204,7 @@ public class CoronaVirusService {
     }
 
 
-    public String GetRecoveredCasesRateByCountry(String countryName){
+    public String getRecoveredCasesRateByCountry(String countryName){
 
         CoronaVirus coronaVirusCountry = coronaVirusRepository.findByCountry(countryName);
 
@@ -225,8 +229,18 @@ public class CoronaVirusService {
     }
 
 
-    public void SaveAllData(List<CoronaVirus> coronaVirusListToSave){
+    public void saveAllData(ObjectMapper objectMapper, InputStream inputStream, TypeReference<List<CoronaVirus>> typeReference){
 
-        coronaVirusRepository.saveAll(coronaVirusListToSave);
+        try {
+            List<CoronaVirus> coronaVirusList = objectMapper.readValue(inputStream,typeReference);
+
+            coronaVirusRepository.saveAll(coronaVirusList);
+
+            System.out.println("Data Saved!");
+
+        } catch (IOException e){
+
+            System.out.println("Unable to save data: " + e.getMessage());
+        }
     }
 }
