@@ -229,9 +229,12 @@ public class CoronaVirusService {
     }
 
 
-    public void saveAllData(ObjectMapper objectMapper, InputStream inputStream, TypeReference<List<CoronaVirus>> typeReference){
+    public void saveAllData(InputStream inputStream, TypeReference<List<CoronaVirus>> typeReference){
+
+        ObjectMapper objectMapper = new ObjectMapper();
 
         try {
+
             List<CoronaVirus> coronaVirusList = objectMapper.readValue(inputStream,typeReference);
 
             coronaVirusRepository.saveAll(coronaVirusList);

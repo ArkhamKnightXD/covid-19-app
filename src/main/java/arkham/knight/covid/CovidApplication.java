@@ -3,7 +3,6 @@ package arkham.knight.covid;
 import arkham.knight.covid.models.CoronaVirus;
 import arkham.knight.covid.services.CoronaVirusService;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,14 +21,12 @@ public class CovidApplication {
     CommandLineRunner runner(CoronaVirusService coronaVirusService){
         return args -> {
 
-            ObjectMapper mapper = new ObjectMapper();
-
             TypeReference<List<CoronaVirus>> typeReference = new TypeReference<List<CoronaVirus>>(){};
 
             InputStream inputStream = TypeReference.class.getResourceAsStream("/json/data.json");
 
 
-            coronaVirusService.saveAllData(mapper,inputStream,typeReference);
+            coronaVirusService.saveAllData(inputStream,typeReference);
         };
     };
 }
