@@ -25,7 +25,6 @@ public class CovidApplication {
 
             InputStream inputStream = TypeReference.class.getResourceAsStream("/json/data.json");
 
-
             coronaVirusService.saveAllData(inputStream,typeReference);
         };
     };

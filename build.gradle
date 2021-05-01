@@ -25,7 +25,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.3.1.RELEASE'
     runtimeOnly 'mysql:mysql-connector-java'
-   // testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
+    runtimeOnly 'com.h2database:h2'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
