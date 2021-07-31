@@ -4,7 +4,6 @@ import arkham.knight.covid.models.CoronaVirus;
 import arkham.knight.covid.repositories.CoronaVirusRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -16,8 +15,11 @@ import java.util.List;
 @Service
 public class CoronaVirusService {
 
-    @Autowired
-    private CoronaVirusRepository coronaVirusRepository;
+    private final CoronaVirusRepository coronaVirusRepository;
+
+    public CoronaVirusService(CoronaVirusRepository coronaVirusRepository) {
+        this.coronaVirusRepository = coronaVirusRepository;
+    }
 
 
     public List<CoronaVirus> findAllData(){
